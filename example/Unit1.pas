@@ -43,7 +43,7 @@ begin
   Cliente.TIPO := 2;
   Cliente.NOMEFANTASIA := 'EDSON ALVES';
   Cliente.RAZAOSOCIAL  := 'MEIRIELLE RODRIGUES';
-  Cliente.CPF          := '35540634870';
+  Cliente.CPF          := '00000000000';
   Cliente.NASCIMENTO   := Date;
   DaoCliente.Insert(Cliente);
 
@@ -65,7 +65,7 @@ begin
   Cliente.TIPO := 2;
   Cliente.NOMEFANTASIA := 'EDSON ALVES';
   Cliente.RAZAOSOCIAL  := 'MEIRIELLE RODRIGUES';
-  Cliente.CPF          := '35540634870';
+  Cliente.CPF          := '00000000000';
   Cliente.NASCIMENTO   := Date + 1;
   DaoCliente.Update(Cliente);
 
