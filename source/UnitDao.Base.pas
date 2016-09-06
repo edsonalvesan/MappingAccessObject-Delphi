@@ -1,35 +1,35 @@
 {******************************************************************************}
-{ Projeto: Classe Para Mapeamento de Object e CriaÁ„o de Interface SQL         }
-{ Esta classe busca agilizar o processo de manipulaÁ„o de dados (DAO/CRUD),    }
-{ ou seja,  gerar inserts, updates, deletes nas tabelas de forma autom·tica,   }
+{ Projeto: Classe Para Mapeamento de Object e Cria√ß√£o de Interface SQL         }
+{ Esta classe busca agilizar o processo de manipula√ß√£o de dados (DAO/CRUD),    }
+{ ou seja,  gerar inserts, updates, deletes nas tabelas de forma autom√°tica,   }
 { sem a necessidade de criarmos classes DAOs para cada tabela. Passando        }
 { apenas o objeto para classe realizar o mepeamento e montar o SQL de acordo   }
 { com as propriedades que tenham valor no Objeto                               }
 {                                                                              }
 {                                                                              }
 {                                                                              }
-{ Direitos Autorais Reservados (c) 2014 Luiz Carlos Alves                      }
+{ Direitos Autorais Reservados (c) 2014 Edson Alves                     }
 {                                                                              }
 { Colaboradores nesse arquivo:                                                 }
 {    Edson Alves - edson.alvesan@gmail.com                                     }
 {                                                                              }
-{ VocÍ pode obter a ˙ltima vers„o desse arquivo no repositÛrio                 }
+{ Voc√™ pode obter a √∫ltima vers√£o desse arquivo no reposit√≥rio                 }
 { https://github.com/edsonalvesan/MappingAccessObject-Delphi                   }
 {                                                                              }
-{  Esta biblioteca È software livre; vocÍ pode redistribuÌ-la e/ou modific·-la }
-{ sob os termos da LicenÁa P˙blica Geral Menor do GNU conforme publicada pela  }
-{ Free Software Foundation; tanto a vers„o 2.1 da LicenÁa, ou (a seu critÈrio) }
-{ qualquer vers„o posterior.                                                   }
+{  Esta biblioteca √© software livre; voc√™ pode redistribu√≠-la e/ou modific√°-la }
+{ sob os termos da Licen√ßa P√∫blica Geral Menor do GNU conforme publicada pela  }
+{ Free Software Foundation; tanto a vers√£o 2.1 da Licen√ßa, ou (a seu crit√©rio) }
+{ qualquer vers√£o posterior.                                                   }
 {                                                                              }
-{ Esta biblioteca È distribuÌda na expectativa de que seja ˙til, porÈm, SEM   }
-{ NENHUMA GARANTIA; nem mesmo a garantia implÌcita de COMERCIABILIDADE OU      }
-{ ADEQUA«√O A UMA FINALIDADE ESPECÕFICA. Consulte a LicenÁa P˙blica Geral Menor}
-{ do GNU para mais detalhes. (Arquivo LICEN«A.TXT ou LICENSE.TXT)              }
+{ Esta biblioteca √© distribu√≠da na expectativa de que seja √∫til, por√©m, SEM   }
+{ NENHUMA GARANTIA; nem mesmo a garantia impl√≠cita de COMERCIABILIDADE OU      }
+{ ADEQUA√á√ÉO A UMA FINALIDADE ESPEC√çFICA. Consulte a Licen√ßa P√∫blica Geral Menor}
+{ do GNU para mais detalhes. (Arquivo LICEN√áA.TXT ou LICENSE.TXT)              }
 {                                                                              }
-{ VocÍ deve ter recebido uma cÛpia da LicenÁa P˙blica Geral Menor do GNU junto}
-{ com esta biblioteca; se n„o, escreva para a Free Software Foundation, Inc.,  }
-{ no endereÁo 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.          }
-{ VocÍ tambÈm pode obter uma copia da licenÁa em:                              }
+{ Voc√™ deve ter recebido uma c√≥pia da Licen√ßa P√∫blica Geral Menor do GNU junto}
+{ com esta biblioteca; se n√£o, escreva para a Free Software Foundation, Inc.,  }
+{ no endere√ßo 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.          }
+{ Voc√™ tamb√©m pode obter uma copia da licen√ßa em:                              }
 { http://www.opensource.org/licenses/lgpl-license.php                          }
 {                                                                              }
 { Edson Alves - edson.alvesan@gmail.com
@@ -66,8 +66,8 @@ public
   procedure ListObjectProperties(AObject: TObject; AStrings: TStrings);
   procedure SetParam(AQry: TIBQuery; AObject: TObject);
   
-  function CrateSQLInsert(AObject: TObject; Table:string) :string;
-  function CrateSQLUpdate(AObject: TObject; Table:string) :string;
+  function CreateSQLInsert(AObject: TObject; Table:string) :string;
+  function CreateSQLUpdate(AObject: TObject; Table:string) :string;
   function CreateSQLDelete(Table:string) :string;
   function CreateSQLFind(Table:string):string;
 
@@ -94,7 +94,7 @@ begin
   inherited;
 end;
 
-function TDaoBase.CrateSQLInsert(AObject: TObject; Table:string): string;
+function TDaoBase.CreateSQLInsert(AObject: TObject; Table:string): string;
 var
   QuantityFildList   : Integer;
   Separador   : string;
@@ -132,7 +132,7 @@ begin
     ASql.Free;
 end;
 
-function TDaoBase.CrateSQLUpdate(AObject: TObject; Table: string): string;
+function TDaoBase.CreateSQLUpdate(AObject: TObject; Table: string): string;
 var
   QuantityFildList   : Integer;
   Separador   : string;
@@ -225,7 +225,7 @@ begin
             AStrings.Add(PropInfo^.Name);
           end;
          end;
-         tkChar, tkString, tkLString: // Para versıes superiores ao Delphi 7 acrescentar tkUString
+         tkChar, tkString, tkLString: // Para vers√µes superiores ao Delphi 7 acrescentar tkUString
          begin
           begin
            if ValidateString(sValue) then
@@ -285,7 +285,7 @@ begin
            SetParamValueQuery(PropInfo,PropInfo^.Name, AQry, sValue);
           end;
          end;
-         tkChar, tkString, tkLString: // Para versıes superiores ao Delphi 7 acrescentar tkUString
+         tkChar, tkString, tkLString: // Para vers√µes superiores ao Delphi 7 acrescentar tkUString
          begin
           begin
            if ValidateString(sValue) then
@@ -322,7 +322,7 @@ begin
   case AProp^.PropType^.Kind of
     tkInt64, tkInteger:
     AQry.ParamByName(ACampo).AsInteger := sValue;
-    tkChar, tkString, tkLString:  // Para versıes superiores ao Delphi 7 acrescentar tkUString
+    tkChar, tkString, tkLString:  // Para vers√µes superiores ao Delphi 7 acrescentar tkUString
     AQry.ParamByName(ACampo).AsString := sValue;
     tkFloat:
       begin
@@ -334,7 +334,7 @@ begin
     tkVariant:
     AQry.ParamByName(ACampo).Value := sValue;
   else
-    raise Exception.Create('Tipo de campo n„o conhecido: ' +
+    raise Exception.Create('Tipo de campo n√£o conhecido: ' +
       AProp.Name);
   end;
 end;
