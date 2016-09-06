@@ -46,7 +46,7 @@ end;
 function TDaoCliente.Insert(Classe: TCliente): Boolean;
 begin
  Query.SQL.Clear;
- Query.SQL.Text := CrateSQLInsert(Classe, table);
+ Query.SQL.Text := CreateSQLInsert(Classe, table);
  SetParam(Query, Classe);
  Query.ExecSQL;
 end;
@@ -54,7 +54,7 @@ end;
 function TDaoCliente.Update(Classe: TCliente): Boolean;
 begin
  Query.SQL.Clear;
- Query.SQL.Text := CrateSQLUpdate(Classe, table);
+ Query.SQL.Text := CreateSQLUpdate(Classe, table);
  SetParam(Query, Classe);
  Query.ExecSQL;
 end;
